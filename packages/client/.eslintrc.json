@@ -1,0 +1,74 @@
+{
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "test",
+    "typings"
+  ],
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "@vue/eslint-config-typescript/recommended",
+    "./.eslintrc-auto-import.json"
+  ],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "$$": "readonly",
+    "$ref": "readonly",
+    "JSX": "readonly",
+    "Nullable": "readonly",
+    "EmRouteRaw": "readonly",
+    "RowScoped": "readonly"
+  },
+  "rules": {
+    "no-var": "warn",
+    "no-undef": "error",
+    "vue/multi-word-component-names": 0,
+    "vue/singleline-html-element-content-newline": 0,
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "any",
+          "normal": "always",
+          "component": "always"
+        },
+        "svg": "always",
+        "math": "always"
+      }
+    ],
+    "vue/max-attributes-per-line": [
+      "warn",
+      {
+        "singleline": {
+          "max": 4
+        },
+        "multiline": {
+          "max": 1
+        }
+      }
+    ],
+    "@typescript-eslint/ban-ts-comment": 0,
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": [
+      1
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used"
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-explicit-any": 0
+  }
+}

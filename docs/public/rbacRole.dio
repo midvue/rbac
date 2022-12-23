@@ -1,0 +1,67 @@
+<mxfile host="65bd71144e">
+    <diagram id="PH-mLC8mOBAwBKjAwTOG" name="第 1 页">
+        <mxGraphModel dx="1143" dy="910" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="12" value="角色继承" style="swimlane;startSize=20;horizontal=1;childLayout=treeLayout;horizontalTree=0;resizable=0;containerType=tree;" parent="1" vertex="1">
+                    <mxGeometry x="148" y="179" width="568" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="技术经理" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="236.35000000000002" y="40" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="后台组长" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="20" y="130" width="93" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285.3499999999999" y="80" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="前端组长" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="235" y="130" width="100" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285.3499999999999" y="80" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" source="14" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-210.64999999999998" y="236" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="JAVA开发" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="26.5" y="217" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" source="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-76.14999999999998" y="236" as="sourcePoint"/>
+                        <mxPoint x="221.5" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="web开发" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="182" y="220" width="81" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" source="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-76.14999999999998" y="236" as="sourcePoint"/>
+                        <mxPoint x="345.5" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="小程序开发" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="303" y="220" width="87" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;rounded=0;fillColor=#e3c800;strokeColor=#B09500;" parent="12" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285.3499999999999" y="80" as="sourcePoint"/>
+                        <mxPoint x="500.70000000000005" y="130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="35" value="AI组长" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="448" y="130" width="100" height="37" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

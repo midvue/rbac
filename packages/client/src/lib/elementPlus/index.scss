@@ -1,0 +1,57 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors:(
+    'primary': (
+      'base': #003261,
+    ),
+    'success': (
+      'base': #21ba45,
+    ),
+    'warning': (
+      'base': #f2711c,
+    ),
+    'danger': (
+      'base': #db2828,
+    ),
+    'error': (
+      'base': #db2828,
+    ),
+    'info': (
+      'base': #333333,
+    ),
+   ),
+
+   $font-size:(
+     'base': 13px
+   ),
+
+   $common-component-size: (
+    'default': 28px,
+   ),
+   $input-height: (
+    'default': 28px,
+   ),
+ 
+  $border-radius: (
+    'base': 2px,
+    'small': 1px,
+  ),
+
+  /* buttton */
+  $button-padding-vertical: (
+    'large': 13px,
+    'default': 5px,
+    'small': 4px,
+  ),
+  
+  $button-padding-horizontal: (
+    'large': 20px,
+    'default': 12px,
+    'small': 11px,
+  ),
+
+   /* table */
+  $table-font-size: (
+    'default': 13px,
+    "small":13px
+  )
+);

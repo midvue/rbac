@@ -1,0 +1,218 @@
+@charset 'utf-8';
+
+body,
+html {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-weight: 400;
+  font-family: Microsoft YaHei, PingFangSC-Regular, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/*去除点击高亮*/
+a,
+button,
+input {
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+/* img,
+input,
+textarea {
+  vertical-align: middle;
+} */
+
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+button,
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+input.focus,
+textarea.focus,
+button:focus {
+  outline: none;
+}
+
+input.active,
+textarea.active,
+button:active,
+button:visited {
+  outline: none;
+}
+
+table tr th {
+  font-weight: normal;
+}
+img {
+  border-width: 0;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  zoom: 1;
+  overflow: hidden;
+}
+
+a:focus,
+a:active {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  overflow: hidden;
+  -webkit-transition: font-size 0.25s ease-out 0s;
+  -moz-transition: font-size 0.25s ease-out 0s;
+  transition: font-size 0.25s ease-out 0s;
+}
+
+/*微软浏览器密码输入框内置眼睛图片*/
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+
+*,
+::before,
+::after {
+  /*选择所有标签*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 火狐滚动条 */
+  scrollbar-color: #c2c2c2 #f5f5f5; /* 滑块颜色  滚动条背景颜色 */
+  scrollbar-width: thin; /* 滚动条宽度有三种：thin、auto、none */
+}
+//滚动条自定义
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #f5f5f5;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #c2c2c2;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #efefef;
+}
+
+//padding margin
+@each $type in (0, 1, 2, 5, 8, 10, 15, 16, 20, 30, 40, 45, 50, 100) {
+  .mt#{$type} {
+    margin-top: #{$type}px;
+  }
+  .mb#{$type} {
+    margin-bottom: #{$type}px;
+  }
+  .mr#{$type} {
+    margin-right: #{$type}px;
+  }
+  .ml#{$type} {
+    margin-left: #{$type}px;
+  }
+  .mg#{$type} {
+    margin: #{$type}px;
+  }
+  .pt#{$type} {
+    padding-top: #{$type}px;
+  }
+  .pb#{$type} {
+    padding-bottom: #{$type}px;
+  }
+  .pr#{$type} {
+    padding-right: #{$type}px;
+  }
+  .pl#{$type} {
+    padding-left: #{$type}px;
+  }
+  .pd#{$type} {
+    padding: #{$type}px;
+  }
+}
+
+//字体大小
+@each $type in (12, 13, 14, 15, 16, 18, 20, 40) {
+  .font#{$type} {
+    font-size: #{$type}px;
+  }
+}
+
+//宽度
+@each $type in (80, 90, 108, 110, 120, 150, 160, 200, 250, 280, 500, 600) {
+  .w#{$type} {
+    width: #{$type}px;
+  }
+}
+//display
+@each $type in (block, inline-block, inline, flex) {
+  .#{$type} {
+    display: #{$type};
+  }
+}
+
+//字体对齐
+@each $type in (left, right, center) {
+  .text-#{$type} {
+    text-align: #{$type};
+  }
+}
+
+.text-ellipsis {
+  display: inline-block;
+  width: 100%;
+  word-break: break-all;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@import "./element.scss";
+@import "./page.scss";
+@import "./transition.scss";
