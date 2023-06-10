@@ -1,39 +1,20 @@
 {
   "name": "psite",
-  "version": "0.1.0",
-  "description": "this midway rbac",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev:client": "pnpm -C packages/client dev",
-    "dev:server": "pnpm -C packages/server dev",
-    "dev:docs": "pnpm -C docs dev",
-    "dev": "run-p  dev:client  dev:server",
-    "build:client": "pnpm -C packages/client build",
-    "build:server": "pnpm -C packages/server build",
-    "build:docs": "pnpm -C docs build",
-    "build": "run-p  build:client  build:server",
-    "start": "pnpm -C packages/server start",
-    "fix": "eslint --fix src",
-    "build:eprint": "pnpm -C packages/eprint build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "dayjs": "^1.10.7"
-  },
-  "devDependencies": {
-    "@types/node": "16",
-    "eslint": "^8.5.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^4.6.4"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/midvue/rbac.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@eslint/*",
-        "@typescript@/*"
-      ]
-    }
-  }
+  "bugs": {
+    "url": "https://github.com/midvue/rbac/issues"
+  },
+  "homepage": "https://github.com/midvue/rbac#readme"
 }

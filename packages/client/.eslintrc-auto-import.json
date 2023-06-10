@@ -1,7 +1,0 @@
-{
-  "globals": {
-    "$EmMsg": true,
-    "$EmMsgBox": true,
-    "util": true
-  }
-}

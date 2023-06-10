@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue + TS</title>
+    <!-- 静态资源占位 .js .css ... -->
+    <!--preload-links-->
+  </head>
+  <body>
+    <!-- 应用代码占位 -->
+    <div id="app"><!--ssr-outlet--></div>
+    <script type="module" src="/src/main.ts"></script>
+    <!-- 引用客户端入口文件 -->
+    <script type="module" src="/src/entry-client.ts" ></script>
+    <script>
+      // 服务端获取的数据统一挂载到window上
+      window.__INITIAL_STATE__ = '<!--pinia-state-->'
+    </script>
+  </body>
+</html>
