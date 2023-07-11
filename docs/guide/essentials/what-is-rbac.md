@@ -4,7 +4,11 @@
 
 > **RBAC** 是`Role Based Access Control`的英文缩写，意思是 `基于角色的访问控制`
 
-通过引入角色概念，把权限先绑定给角色，然后再把角色挂载给用户主体; 这种方式只要简单授权操作,就能满足绝大多数权限系统需求
+通过引入`角色`概念，把 **权限先绑定给角色，再把角色挂载给用户主体;** 这种方式只要简单授权操作,就能满足绝大多数权限系统需求
+
+::: tip
+系统中的**用户会很多,但是角色就那么几个**,所以把权限绑定给角色,就不用给每个用户再单独授权了
+:::
 
 ## 2、RBAC 的基础
 
@@ -20,11 +24,11 @@ RBAC 模型中,重点是角色(区别于 ACL 模型 ),具体如下:
 
 - **User（用户）**：系统的用户管理,包含用户的账号,密码,id 等基本数据
 - **Role（角色）**：不同角色具有不同的权限
-- **Permission（权限）**：访问权限(**Menu**), 有些可以分为`菜单按钮权限`和`数据权限`
-- User-Role(用户与角色)：绑定用户和角色之间的关系
-- Role-Permission(角色-权限)：绑定角色和权限之间的关系
+- **Menu（权限）**：访问菜单权限(也叫**Permission**), 有些可以分为`菜单按钮权限`和`数据权限`
+- **User-Role(用户与角色)**：绑定用户和角色之间的关系
+- **Role-Menu(角色-权限)**：绑定角色和权限之间的关系
 
-![rbac关系](/public/img/img_rbac_intro.png)
+![rbac关系](/img/img_rbac_intro.png)
 
 ## 3、RBAC 的子模型
 
@@ -37,11 +41,11 @@ RBAC 主要包含四个子模型：RBAC0、RBAC1、RBAC2 和 RBAC3，整体又�
 - **RBAC2** 在 RBAC0 模型增加了**角色,权限约束**,这个一般具体受业务需求影响大
 - **RBAC3** 集聚 RBAC1 和 RBAC2 的全部特点,同时将**角色继承和约束条件**关系
 
-![rbac95](/public/img/img_rbac_96.png)
+![rbac95](/img/img_rbac_96.png)
 
 ---
 
 ### 参考文档:
 
-[RBAC 简介](https://blog.csdn.net/weixin_42408447/article/details/121157616)  
+[RBAC 简介](https://blog.csdn.net/weixin_42408447/article/details/121157616)
 [什么是 RBAC](https://blog.csdn.net/qq_45874107/article/details/119839187)
