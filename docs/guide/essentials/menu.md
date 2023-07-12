@@ -18,7 +18,9 @@
      path: "menuMg",
      name: "menuMg",
      component: () => import("@/views/sysMgr/menuMg/list/index.vue"),
+     hidden:false,
      meta: {
+       icon:'menu',
        title: "菜单管理",
      },
    },
