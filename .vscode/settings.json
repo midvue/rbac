@@ -30,7 +30,6 @@
  
   "emmet.includeLanguages": {
     "javascript": "html",
-    "vue": "html",
     "vue-html": "html",
     "plaintext": "jade",
     "ejs": "html",

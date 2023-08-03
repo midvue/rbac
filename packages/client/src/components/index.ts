@@ -1,6 +1,13 @@
-import type { App } from "vue";
-import EmTable from "./EmTable/index.vue";
+import type { App, Plugin } from "vue";
 
-export const useComponent = (app: App) => {
-  app.component(EmTable.name, EmTable);
+export * from "./EmForm";
+export * from "./EmTable";
+
+const modules = import.meta.glob<Plugin>("./*/index.ts", { import: "default", eager: true });
+
+const install = (app: App<Element>) => {
+  for (const path in modules) {
+    modules[path].install?.(app);
+  }
 };
+export default { install };
