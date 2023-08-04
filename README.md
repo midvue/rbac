@@ -1,11 +1,11 @@
 # 简介 {#introduction}
 
-::: tip
-
 **系统权限设计**几乎是每个 web 系统都需要具备的功能;  
 而`RBAC`也是权限体系中最常用的策略模型
 
-:::
+## 体验地址
+
+体验地址: [rbac.feiyanyun.com](https://rbac.feiyanyun.com/)(admin/123456)
 
 ## 关于 Midway-RBAC
 
@@ -14,8 +14,6 @@
 - **Midway**：是淘宝前端架构团队，基于渐进式理念研发的 Node.js 框架，通过自研的依赖注入容器; 生态好、简单、易用、可靠。[官网地址](https://midwayjs.org/)
 
 - **Vue3**：渐进式 JavaScript 前端框 mvvm 架,vue3 使用函数式编程,`compositon api + tsx`,易学易用，性能出色! [官网地址](https://cn.vuejs.org/)
-
-- **casbin**：Casbin 是一个强大和高效的开放源码访问控制库，它支持各种 访问控制模型 以强制全面执行授权。[官网地址](https://docs.casbin.cn/zh/docs/overview)
 
 - **pnpm**：高性能的,快速的，节省磁盘空间的包管理工具,内置`Monorepos`支持单仓多包,简单易上手! [官网地址](https://pnpm.io/zh/)
 
