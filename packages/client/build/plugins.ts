@@ -44,7 +44,7 @@ export const useplugins = (env: Record<string, string>, mode: string) => {
 
   if (isProd) {
     // compression 压缩
-    plugins.push(viteCompression());
+    plugins.push(viteCompression({ filter: /\.(js|mjs|json|css)$/i }));
   }
   return plugins;
 };

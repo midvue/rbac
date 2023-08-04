@@ -1,1 +1,4 @@
 node_modules
+deploy/client
+deploy/server/dist
+dist

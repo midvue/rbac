@@ -1,12 +1,12 @@
 {
   "apps": [
     {
-      "name": "el-web-print",
+      "name": "midway-rbac",
       "script": "bootstrap.js",
       "cwd": "./",
       "exec_mode": "cluster_mode",
-      "instances": 4,
-      "max_memory_restart": "2G",
+      "instances": 2,
+      "max_memory_restart": "512M",
       "restart_delay": 30,
       "autorestart": true,
       "watch": false,

@@ -26,13 +26,6 @@ export default ({ mode }: ConfigEnv) => {
       chunkSizeWarningLimit: 2000,
       emptyOutDir: true,
       outDir: "../../deploy/client",
-      rollupOptions: {
-        input: {
-          main: resolve(__dirname, "index.html"),
-          preview: resolve(__dirname, "preview/index.html"),
-          previewHk: resolve(__dirname, "preview/hk.html"),
-        },
-      },
     },
     css: {
       preprocessorOptions: {

@@ -18,7 +18,7 @@ export const useTagViewsStore = defineStore({
       const hasAdd = this.tagViews.some((item) => item.fullPath === route.fullPath);
       if (!hasAdd) {
         if (route.meta?.keepAlive) {
-          this.cacheViews.push(route.name!);
+          this.cacheViews.push(route.name as string);
         }
         this.tagViews.push(route);
       }

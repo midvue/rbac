@@ -1,4 +1,5 @@
 import type { IProps } from "../props";
+import type { RowScoped } from "../types";
 
 export const useBtns = (props: IProps) => {
   return () => {
@@ -12,7 +13,7 @@ export const useBtns = (props: IProps) => {
         fixed={props.action.fixed}
       >
         {{
-          default: (scoped: unknown) => {
+          default: (scoped: RowScoped) => {
             return props.action.buttons.map((btn) => (
               <el-button
                 type={btn.type || "primary"}

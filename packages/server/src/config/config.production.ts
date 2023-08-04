@@ -9,7 +9,7 @@ export default {
         host: '127.0.0.1',
         port: 3306,
         username: 'psite',
-        password: '7RkhYBdB8bjTz3F8',
+        password: '524hk4KSBA5WzCGj',
         database: 'psite',
         synchronize: false,
         logging: false,

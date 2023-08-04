@@ -1,21 +1,19 @@
 import type { IProps } from "../props";
-import type { ICol } from "../types";
+import type { ICol, RowScoped } from "../types";
 
 export const useCols = (props: IProps) => {
   const renderCol = (col: ICol, key: number) => {
-    const { render, renderHeader } = col;
+    const { render, renderHeader, ...rest } = col;
 
     const defaultAttr = { highlightCurrentRow: true, showOverflowTooltip: true, align: "center" };
-    const cAttr = Object.assign(defaultAttr, col);
+    const cAttr = Object.assign(defaultAttr, rest);
     //插槽
     const vSlot = {} as Record<string, unknown>;
     if (render) {
-      vSlot.default = (scoped: unknown) => render?.(scoped);
-      delete cAttr.render;
+      vSlot.default = (scoped: RowScoped) => render?.(scoped);
     }
     if (renderHeader) {
-      vSlot.header = (scoped: unknown) => renderHeader?.(scoped);
-      delete cAttr.renderHeader;
+      vSlot.header = (scoped: RowScoped) => renderHeader?.(scoped);
     }
     return <el-table-column key={key} {...cAttr} v-slots={vSlot}></el-table-column>;
   };

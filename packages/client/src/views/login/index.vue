@@ -1,76 +1,67 @@
 <template>
   <div class="login-container">
-    <el-form
-      ref="loginFormRef"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      autocomplete="on"
-      label-position="left"
-      @submit.prevent="handleLogin"
-    >
+    <div class="login-form">
       <div class="title-container">
-        <!-- <img
-          src="../../assets/images/ic_login_logo.png"
-          alt=""
-          title="飞燕云"
-          class="log"
-        > -->
         <div class="title">
-          <h3>飞燕云后台管理系统</h3>
-          <!-- <span>vue3+midway</span> -->
+          <h3>Vue3+Midway+RBAC</h3>
         </div>
       </div>
+      <em-form
+        ref="loginFormRef"
+        :model="loginForm"
+        autocomplete="on"
+        label-width="0px"
+        @submit.prevent="handleLogin"
+      >
+        <el-form-item prop="username" class="el-form-item">
+          <svg-icon name="user" class="svg-container" />
+          <el-input
+            ref="userNameRef"
+            v-model="loginForm.account"
+            placeholder="请输入用户名"
+            name="username"
+            type="text"
+            tabindex="1"
+            autocomplete="on"
+          />
+        </el-form-item>
 
-      <el-form-item prop="username" class="el-form-item">
-        <svg-icon name="user" class="svg-container" />
-        <el-input
-          ref="userNameRef"
-          v-model="loginForm.account"
-          placeholder="请输入用户名"
-          name="username"
-          type="text"
-          tabindex="1"
-          autocomplete="on"
-        />
-      </el-form-item>
+        <el-form-item prop="password" class="el-form-item">
+          <svg-icon name="password" class="svg-container" />
+          <el-input
+            :key="passwordType"
+            ref="passwordRef"
+            v-model="loginForm.password"
+            :type="passwordType"
+            placeholder="请输入密码"
+            name="password"
+            tabindex="2"
+            autocomplete="on"
+            @keyup.enter="handleLogin"
+          />
+        </el-form-item>
 
-      <el-form-item prop="password" class="el-form-item">
-        <svg-icon name="password" class="svg-container" />
-        <el-input
-          :key="passwordType"
-          ref="passwordRef"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="请输入密码"
-          name="password"
-          tabindex="2"
-          autocomplete="on"
-          @keyup.enter="handleLogin"
-        />
-      </el-form-item>
+        <el-checkbox v-model="isRember" class="el-checkbox"> 记住我 </el-checkbox>
 
-      <el-checkbox v-model="isRember" class="el-checkbox"> 记住我 </el-checkbox>
-
-      <el-button :loading="loading" class="btn-login" type="primary" @click.prevent="handleLogin">
-        登 录
-      </el-button>
-    </el-form>
+        <el-button :loading="loading" class="btn-login" type="primary" @click.prevent="handleLogin">
+          登 录
+        </el-button>
+      </em-form>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { unref, reactive, ref, nextTick, toRefs, defineComponent } from "vue";
-import { useRouter } from "vue-router";
-import { getToken, clear } from "@/utils/storage";
-import { useUserStore } from "@/store/modules/user";
+import { EmFormType } from "@/components";
 import { usePermitStore } from "@/store/modules/permit";
+import { useUserStore } from "@/store/modules/user";
+import { clear, getToken } from "@/utils/storage";
+import { defineComponent, reactive, ref, toRefs, unref } from "vue";
+import { useRouter } from "vue-router";
 export default defineComponent({
   components: {},
   setup() {
-    const userNameRef = ref(null);
-    const passwordRef = ref<Nullable<HTMLElement>>(null);
-    const loginFormRef = ref<Nullable<HTMLFormElement>>(null);
+    const loginFormRef = ref<EmFormType.Instance>();
 
     const userStore = useUserStore();
     const permission = usePermitStore();
@@ -80,37 +71,17 @@ export default defineComponent({
       clear();
       window.location.reload();
     }
-    const production = import.meta.env.VITE_NODE_ENV === "production";
 
     const state = reactive({
       loginForm: {
         account: "",
         password: "",
       },
-      loginRules: {
-        account: [{ validator: userNameRef, trigger: "blur" }],
-        password: [{ validator: passwordRef, trigger: "blur" }],
-      },
       passwordType: "password",
       loading: false,
       showDialog: false,
       isRember: false,
     });
-    if (production) {
-      state.loginForm.account = "";
-      state.loginForm.password = "";
-    }
-
-    const showPwd = () => {
-      if (state.passwordType === "password") {
-        state.passwordType = "";
-      } else {
-        state.passwordType = "password";
-      }
-      nextTick(() => {
-        passwordRef.value && passwordRef.value.focus();
-      });
-    };
 
     const handleLogin = async () => {
       const form = unref(loginFormRef);
@@ -128,12 +99,9 @@ export default defineComponent({
     };
 
     return {
-      userNameRef,
-      passwordRef,
       loginFormRef,
       ...toRefs(state),
       handleLogin,
-      showPwd,
     };
   },
 });
@@ -163,10 +131,11 @@ $loginCursorColor: #fff;
     transform: translateY(-50%);
     padding: 60px 40px;
 
-    .el-form-item {
-      margin-bottom: 0px;
-
-      ::v-deep(.el-form-item__content) {
+    .em-form {
+      .el-form-item {
+        margin-bottom: 0px;
+      }
+      :deep(.el-form-item__content) {
         display: flex;
         height: 32px;
         align-items: center;
@@ -198,13 +167,12 @@ $loginCursorColor: #fff;
       margin-top: 20px;
       font-size: 14px;
 
-      ::v-deep(.el-checkbox__label) {
+      :deep(.el-checkbox__label) {
         font-size: 14px;
       }
     }
 
     .btn-login {
-      //background: #297cff;
       margin-top: 56px;
       width: 100%;
       height: 42px;

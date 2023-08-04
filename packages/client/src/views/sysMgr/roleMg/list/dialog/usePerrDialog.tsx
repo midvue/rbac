@@ -1,10 +1,10 @@
-import { nextTick, reactive } from "vue";
+import { ElTree } from "element-plus";
+import { reactive, ref } from "vue";
+import type { Menu } from "../../../menuMg/types";
 import { getRoleMenuPermit, updateMenuPermit } from "../../api";
 import type { OpenPerrDialogFunc, Role } from "../../types";
-import type { Menu } from "../../../menuMg/types";
-import { ElTree } from "element-plus";
 
-interface IfState {
+interface PeState {
   form: Partial<Role>;
   isShow: boolean;
   menuTree: Array<Menu>;
@@ -12,8 +12,8 @@ interface IfState {
 type ElTreeInstance = InstanceType<typeof ElTree> & { setExpandedKeys: (keys: any) => void };
 
 export const usePerrDialog = () => {
-  const treeRef = $ref<ElTreeInstance>();
-  const rState: IfState = reactive({
+  const treeRef = ref<ElTreeInstance>();
+  const rState: PeState = reactive({
     form: {},
     isShow: false,
     menuTree: [],
@@ -38,15 +38,15 @@ export const usePerrDialog = () => {
         })
         .sort((a, b) => a.orderNum - b.orderNum);
 
-      treeRef?.setExpandedKeys(expandKeys);
+      treeRef.value?.setExpandedKeys(expandKeys);
       setTimeout(() => {
-        treeRef?.setCheckedKeys(menuIds);
+        treeRef.value?.setCheckedKeys(menuIds);
       }, 0);
     });
   };
 
   const handleSubmit = async () => {
-    const params = { menuIds: treeRef.getCheckedKeys(), roleId: rState.form.id };
+    const params = { menuIds: treeRef.value!.getCheckedKeys(), roleId: rState.form.id };
     updateMenuPermit(params).then(() => {
       $EmMsg.success("操作成功");
       handleClose();
@@ -70,7 +70,7 @@ export const usePerrDialog = () => {
     if (data.children?.length) {
       //父级状态切换,子集跟着全部切换
       data.children.forEach((child) => {
-        treeRef.setChecked(child.id, isCheckd, true);
+        treeRef.value!.setChecked(child.id, isCheckd, true);
         setDeepChecked(child, isCheckd);
       });
     }
@@ -79,7 +79,7 @@ export const usePerrDialog = () => {
   const handleCheckChange = async (data: Menu, isCheckd: boolean) => {
     //节点选中,父节点也跟着选中
     if (isCheckd && data.pid) {
-      treeRef.setChecked(data.pid, isCheckd, true);
+      treeRef.value!.setChecked(data.pid, isCheckd, true);
     }
 
     //节点取消,判断子节点是否跟着取消
@@ -115,7 +115,7 @@ export const usePerrDialog = () => {
         >
           <el-tree-v2
             class="tree"
-            ref={$$(treeRef)}
+            ref={treeRef}
             data={rState.menuTree}
             props={treeProps}
             highlight-current
