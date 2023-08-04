@@ -29,7 +29,7 @@ export class MenuService extends BaseService {
       name: name ? Like(name + '%') : undefined,
     };
 
-    const results = await this.menuModel.findAndCount({
+    const [list, count] = await this.menuModel.findAndCount({
       select: [
         'id',
         'name',
@@ -53,7 +53,7 @@ export class MenuService extends BaseService {
       take: options.size,
     });
 
-    return { list: results[0], count: results[1] };
+    return { list, count };
   }
 
   async list(options: Partial<MenuDTO>) {
@@ -67,7 +67,7 @@ export class MenuService extends BaseService {
 
   async listByRole(options) {
     const { roleIds } = options || {};
-    console.log(roleIds);
+    console.log('角色', roleIds);
 
     const list = await this.menuModel
       .createQueryBuilder('a')
@@ -108,5 +108,13 @@ export class MenuService extends BaseService {
 
   async delete(id: number) {
     return await this.menuModel.delete(id);
+  }
+
+  /**
+   * 批量插入
+   */
+  async batchCreate(inDtos: Array<MenuCreateDTO>) {
+    const { raw } = await this.menuModel.insert(inDtos);
+    return raw;
   }
 }

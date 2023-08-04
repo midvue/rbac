@@ -32,7 +32,7 @@ interface Btn<T> {
   size?: "small" | "default" | "large";
   icon?: string;
   click?: (scoped: RowScoped<T>) => void;
-  permission: string;
+  permission?: string;
 }
 
 export type IAction<T = any> = {

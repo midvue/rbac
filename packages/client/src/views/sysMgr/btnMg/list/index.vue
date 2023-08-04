@@ -1,35 +1,33 @@
 <script lang="tsx">
 import { defineComponent, reactive } from "vue";
-import { getUserList } from "../api";
-import { getRoleList } from "../../../../api/role/roleApi";
-import type { UserListState } from "../types";
+import { getBtnList } from "../api";
+import type { BtnListState } from "../types";
 import { useEditDialog } from "./useEditDialog";
 import { useList } from "./useList";
 import { useSearchForm } from "./useSearchForm";
 
 export default defineComponent({
-  name: "UserMg",
+  name: "BtnMg",
   setup() {
-    const state: UserListState = reactive({
+    const state: BtnListState = reactive({
       listLoading: false,
-      userList: [],
+      btnList: [],
       searcForm: {},
       pagination: {
         current: 1,
         size: 20,
         total: 0,
       },
-      roleList: [],
     });
 
     //获取用户列表
     const getSearchList = () => {
       const params = Object.assign({}, state.searcForm, state.pagination);
       state.listLoading = true;
-      getUserList(params)
+      getBtnList(params)
         .then((res) => {
           state.listLoading = false;
-          state.userList = res.data.list || [];
+          state.btnList = res.data.list || [];
           state.pagination.total = res.data.count;
         })
         .catch(() => {
@@ -37,19 +35,12 @@ export default defineComponent({
         });
     };
 
-    const getSelectRoleList = async () => {
-      const { data } = await getRoleList();
-      state.roleList = data;
-    };
-
-    getSelectRoleList();
-
     const renderSearch = useSearchForm(state, getSearchList);
     const { render: renderDialog, openDialog } = useEditDialog(state, getSearchList);
     const renderList = useList(state, openDialog, getSearchList);
 
     return () => (
-      <div class="user-list">
+      <div class="btn-mg">
         {renderSearch()}
         {renderList()}
         {renderDialog()}

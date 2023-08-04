@@ -18,14 +18,15 @@ export interface Menu {
   children?: Menu[];
   pids?: number[];
   permissions: [];
+  disabled?: boolean;
 }
 
 export interface MenuListState {
   listLoading: boolean;
   menuList: Menu[];
   currNodes: Partial<Menu>[];
-  currBtns: Partial<Menu>[];
+  currBtns: Menu[];
   menuTree: Partial<Menu>[];
 }
 
-export type OpenDialogFunc = (isAdd: boolean, form?: Partial<Menu>) => void;
+export type OpenDialogFunc = (form?: Partial<Menu>) => void;

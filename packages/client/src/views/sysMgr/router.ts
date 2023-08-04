@@ -30,5 +30,13 @@ export default {
         title: "菜单管理",
       },
     },
+    {
+      path: "btnMg",
+      name: "btnMg",
+      component: () => import("@/views/sysMgr/btnMg/list/index.vue"),
+      meta: {
+        title: "基础按钮管理",
+      },
+    },
   ],
 };

@@ -1,14 +1,22 @@
-import type { OpenDialogFunc, Menu, MenuListState } from "../types";
+import { h, resolveComponent, watch } from "vue";
 import { deleteMenu, getMenuList } from "../api";
-import { h, ref, resolveComponent, watch } from "vue";
-import { useButtonDialog } from "./dialog/useButtonDialog";
+import type { Menu, MenuListState, OpenDialogFunc } from "../types";
+import { useBasicBtnDialog } from "./dialog/useBasicBtnDialog";
+import { useBtnDialog } from "./dialog/useBtnDialog";
+import type { EmTableType } from "@/components";
 
+/**
+ * 右边菜单详情
+ * @param state  MenuListState
+ * @param openMenuDialog
+ * @param getSearchList
+ */
 export const useDetail = (
   state: MenuListState,
-  openDialog: OpenDialogFunc,
+  openMenuDialog: OpenDialogFunc,
   getSearchList: () => void
 ) => {
-  const cols = ref([
+  const cols: EmTableType.Cols<Menu> = [
     {
       prop: "id",
       label: "编号",
@@ -32,8 +40,8 @@ export const useDetail = (
       label: "图标",
       width: 60,
       align: "center",
-      render: ({ row }: RowScoped<Menu>) => {
-        if (!row.icon) return;
+      render: ({ row }) => {
+        if (!row.icon) return null;
         return h(resolveComponent(row.icon), {
           style: { width: "1.5em", verticalAlign: "middle" },
         });
@@ -67,30 +75,30 @@ export const useDetail = (
       label: "是否显示",
       width: 70,
       align: "center",
-      render: ({ row }: RowScoped<Menu>) => <span>{row.isShow ? "是" : "否"}</span>,
+      render: ({ row }) => <span>{row.isShow ? "是" : "否"}</span>,
     },
     {
       prop: "keepAlive",
       label: "是否缓存",
       width: 70,
       align: "center",
-      render: ({ row }: RowScoped<Menu>) => <span>{row.keepAlive ? "是" : "否"}</span>,
+      render: ({ row }) => <span>{row.keepAlive ? "是" : "否"}</span>,
     },
-  ]);
+  ];
 
-  const tableAction = {
+  const tableAction: EmTableType.IAction<Menu> = {
     width: 130,
     buttons: [
       {
         title: "编辑",
         type: "primary",
-        click: ({ row }: RowScoped<Menu>) => openDialog(false, row),
+        click: ({ row }) => openMenuDialog(row),
         permission: "menu:edit",
       },
       {
         title: "删除",
         type: "danger",
-        click: ({ row }: RowScoped<Menu>) => handleDelete(row.id),
+        click: ({ row }) => handleDelete(row.id),
         permission: "menu:del",
       },
     ],
@@ -112,13 +120,12 @@ export const useDetail = (
       });
     });
   };
-  const { render: renderDialog, openBtnDialog } = useButtonDialog(state, getBtnlist);
-  const rendBtnTable = useBtnTable(state, openBtnDialog, getBtnlist);
+
+  const rendBtnTable = useBtnTable(state, getBtnlist);
   return () => (
     <el-main class="main">
-      <em-table data={state.currNodes} cols={cols.value} action={tableAction}></em-table>
+      <em-table data={state.currNodes} cols={cols} action={tableAction}></em-table>
       {rendBtnTable()}
-      {renderDialog()}
     </el-main>
   );
 };
@@ -128,55 +135,51 @@ export const useDetail = (
  * @param state
  * @returns
  */
-const useBtnTable = (
-  state: MenuListState,
-  openBtnDialog: OpenDialogFunc,
-  getBtnlist: () => void
-) => {
-  const btnCols = ref([
+const useBtnTable = (state: MenuListState, getBtnlist: () => void) => {
+  const btnCols: EmTableType.Cols<Menu> = [
     {
-      prop: "id",
       label: "编号",
+      prop: "id",
       align: "center",
       width: 55,
     },
     {
-      prop: "name",
       label: "按钮名",
+      prop: "name",
       align: "center",
     },
     {
-      prop: "code",
       label: "按钮编码",
+      prop: "code",
       align: "center",
     },
     {
-      prop: "orderNum",
+      label: "图标",
+      prop: "icon",
+    },
+    {
       label: "排序",
+      prop: "orderNum",
       align: "center",
     },
-  ]);
+  ];
 
-  const tableAction = {
+  const tableAction: EmTableType.IAction<Menu> = {
     width: 130,
     buttons: [
       {
         title: "编辑",
         type: "primary",
-        click: ({ row }: RowScoped<Menu>) => openBtnDialog(false, row),
+        click: ({ row }) => openBtnDialog(row),
         permission: "menu:editbtn",
       },
       {
         title: "删除",
         type: "danger",
-        click: ({ row }: RowScoped<Menu>) => handleDelete(row.id),
+        click: ({ row }) => handleDelete(row.id),
         permission: "menu:delbtn",
       },
     ],
-  };
-
-  const handleAddBtn = () => {
-    openBtnDialog(true);
   };
 
   const handleDelete = (id: number) => {
@@ -188,19 +191,33 @@ const useBtnTable = (
     });
   };
 
+  const { render: renderBtnDialog, openDialog: openBtnDialog } = useBtnDialog(state, getBtnlist);
+  const { render: renderBaiscBtnDialog, openDialog: openBasicBtnDialog } = useBasicBtnDialog(
+    state,
+    getBtnlist
+  );
+
   return () => (
     <>
       <div class="btn">
         <el-button
           type="primary"
           icon="plus"
-          onClick={() => handleAddBtn()}
-          v-permission="menu:addbtn"
+          onClick={() => {
+            const codes = state.currBtns.map((btn) => btn.code);
+            const pid = state.currNodes[0].id || 0;
+            openBasicBtnDialog(pid, codes);
+          }}
         >
+          同步基础按钮
+        </el-button>
+        <el-button type="primary" icon="plus" onClick={() => openBtnDialog()}>
           添加按钮
         </el-button>
       </div>
-      <em-table data={state.currBtns} cols={btnCols.value} action={tableAction}></em-table>
+      <em-table data={state.currBtns} cols={btnCols} action={tableAction}></em-table>
+      {renderBtnDialog()}
+      {renderBaiscBtnDialog()}
     </>
   );
 };

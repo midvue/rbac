@@ -72,3 +72,27 @@ export const deleteMenu = (params = {}) => {
   };
   return http.delete(option);
 };
+
+/**
+ * 批量添加菜单/按钮
+ * @param {Menu} data 参数
+ */
+export const addBatchMenu = (data: Partial<Menu>[]) => {
+  const option = {
+    url: "/sys/menu/batchCreate",
+    data,
+  };
+  return http.post<Menu>(option);
+};
+
+/**
+ * 获取基础按钮列表
+ * @param {Btn} data 参数
+ */
+export const getBasicBtnList = (data = {}) => {
+  const option = {
+    url: "/sys/btn/list",
+    data,
+  };
+  return http.post<MenuResp>(option);
+};

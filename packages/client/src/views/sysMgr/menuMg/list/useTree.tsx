@@ -12,7 +12,7 @@ interface TreeState {
 }
 type ElTreeInstance = InstanceType<typeof ElTree> & { setExpandedKeys: (keys: any) => void };
 
-export const useTree = (state: MenuListState, openDialog: OpenDialogFunc) => {
+export const useTree = (state: MenuListState, openMenuDialog: OpenDialogFunc) => {
   const treeRef = $ref<ElTreeInstance>();
 
   const tState: TreeState = reactive({
@@ -48,7 +48,7 @@ export const useTree = (state: MenuListState, openDialog: OpenDialogFunc) => {
     treeRef?.setExpandedKeys(expandKeys);
     handleNodeClick(tState.menuTree[0]);
     state.menuTree = Object.assign([], tState.menuTree);
-    state.menuTree.unshift({ id: 0, name: "父级" });
+    state.menuTree.unshift({ id: 0, name: "无" });
   };
 
   watch(() => state.menuList.length, list2Tree);
@@ -62,18 +62,18 @@ export const useTree = (state: MenuListState, openDialog: OpenDialogFunc) => {
   //切换折叠和展开
   const handleToggleExpand = () => {
     const expandKeys = tState.isExpand ? [] : tState.expandKeys;
-    treeRef.setExpandedKeys(expandKeys);
+    treeRef!.setExpandedKeys(expandKeys);
     tState.isExpand = !tState.isExpand;
   };
 
   const hanldeInput = useDebounceFn((query: string) => {
-    treeRef?.filter(query);
+    treeRef!.filter(query);
   }, 300);
 
   return () => (
     <el-aside width="260px" class="aside">
       <div class="btns">
-        <el-button type="primary" onClick={() => openDialog(true)} v-permission="menu:add">
+        <el-button type="primary" onClick={() => openMenuDialog()} v-permission="menu:add">
           新增菜单
         </el-button>
         <el-button type="primary" onClick={() => handleToggleExpand()}>

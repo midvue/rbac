@@ -66,6 +66,14 @@ export class MenuController extends BaseController {
     this.success(res);
   }
 
+  @Post('/batchCreate')
+  @Validate()
+  @ApiOperation({ summary: '批量添加' })
+  async batchCreate(@Body() dtos: Array<MenuCreateDTO>) {
+    const res = await this.menuService.batchCreate(dtos);
+    this.success(res);
+  }
+
   @Put('/update')
   @Validate()
   @ApiOperation({ summary: '更新' })
