@@ -1,14 +1,12 @@
 import { getMenusByRole } from "@/api/user/userApi";
-import { generateAsyncRoutes } from "@/router";
+import { generateAsyncRoutes, router } from "@/router";
 import { store } from "@/store";
 import { getUserInfo } from "@/utils";
 import { defineStore } from "pinia";
 
 interface IPermitStore {
   asyncRouters: EmRouteRaw[];
-  cacheViews: string[];
-  wholeMenus: EmRouteRaw[];
-  buttons: string[];
+  btnMap: Record<string, Record<string, EmRouteRaw>>;
 }
 
 export const usePermitStore = defineStore({
@@ -17,13 +15,7 @@ export const usePermitStore = defineStore({
     return {
       // 动态路由生成的菜单
       asyncRouters: [],
-      // 整体路由生成的菜单（静态、动态）
-      wholeMenus: [],
-      // 深拷贝一个菜单树，与导航菜单不突出
-      menusTree: [],
-      buttons: [],
-      // 缓存页面keepAlive
-      cacheViews: [],
+      btnMap: {},
     } as IPermitStore;
   },
 
@@ -32,15 +24,10 @@ export const usePermitStore = defineStore({
     async getAsyncRoutes() {
       const roleIds = getUserInfo()?.roles.map((role) => role.roleId);
       const list = await getMenusByRole({ roleIds }).then((res) => res.data.list);
-      const { _routes, buttons } = generateAsyncRoutes(list);
-      this.buttons = buttons;
-      this.asyncRouters = _routes;
-      return _routes;
-    },
-
-    // 清空缓存页面
-    clearAllCachePage() {
-      this.cacheViews = [];
+      const { menuTree, btnMap } = generateAsyncRoutes(list, router);
+      this.btnMap = btnMap;
+      this.asyncRouters = menuTree;
+      return menuTree;
     },
   },
 });

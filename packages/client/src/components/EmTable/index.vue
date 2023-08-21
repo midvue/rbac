@@ -10,6 +10,7 @@ export default defineComponent({
     const renderBtns = useBtns(props);
     const renderCols = useCols(props);
     const renderPagination = usePagination(props, ctx);
+
     return () => (
       <>
         <el-table size="small" class="em-table" border stripe {...attrs}>

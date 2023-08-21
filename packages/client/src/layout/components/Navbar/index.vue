@@ -1,11 +1,15 @@
 <template>
   <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggle-click="toggleSideBar" />
+    <hamburger
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggle-click="toggleSideBar"
+    />
     <rigt-menu />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useAppStore } from "@/store/modules/app";
 import { computed, defineComponent } from "vue";
 import Hamburger from "../Hamburger/index.vue";
@@ -58,5 +62,4 @@ export default defineComponent({
 }
 </style>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

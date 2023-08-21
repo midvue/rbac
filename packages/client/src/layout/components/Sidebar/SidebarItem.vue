@@ -17,7 +17,7 @@
     </template>
   </template>
 
-  <el-sub-menu v-else ref="subMenuRef" :index="resolvePath(item.path)" popper-append-to-body>
+  <el-sub-menu v-else ref="subMenuRef" :index="resolvePath(item.path)" teleported>
     <template #title>
       <menu-icon v-if="item.meta" :icon="item.meta && item.meta.icon" />
       <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
@@ -29,7 +29,7 @@
         :item="child"
         :base-path="resolvePath(item.path)"
         class="nest-menu"
-      ></sidebar-item>
+      />
     </template>
   </el-sub-menu>
 </template>
@@ -73,7 +73,7 @@ export default defineComponent({
 
       // 如果没有子child,就显示自身
       if (showingChildren.length === 0) {
-        menuItem.value = { ...parent };
+        menuItem.value = { ...parent, children: undefined };
         return true;
       }
 

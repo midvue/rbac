@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="main-contrainer-wrapper"
-    :class="{ hideSidebar: sidebarOption.hideSidebar }"
-  >
+  <div class="main-contrainer-wrapper" :class="{ hideSidebar: sidebarOption.hideSidebar }">
     <div
       v-if="sidebarOption.isMobile && !sidebarOption.hideSidebar"
       class="drawer-bg"
@@ -20,12 +17,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { Navbar, Sidebar, AppMain, TagsView } from "./components";
 import { useAppStore } from "@/store/modules/app";
-import { DEVICE_TYPE } from "@/store/modules/types";
 import { useSettingStore } from "@/store/modules/settings";
-import { useRoute } from "vue-router";
+import { DEVICE_TYPE } from "@/store/modules/types";
+import { computed, defineComponent } from "vue";
+import { AppMain, Navbar, Sidebar, TagsView } from "./components";
 export default defineComponent({
   name: "Layout",
   components: {
@@ -54,10 +50,6 @@ export default defineComponent({
       return window.self === window.top;
     };
 
-    let isSidebar = computed(() => {
-      return useRoute().meta?.isSidebar ?? true;
-    });
-
     const handleClickOutside = () => {
       appStore.closeSideBar();
     };
@@ -67,7 +59,6 @@ export default defineComponent({
       sidebarOption,
       handleClickOutside,
       isSubApp,
-      isSidebar,
     };
   },
 });

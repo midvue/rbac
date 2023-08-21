@@ -9,7 +9,7 @@ import legacy from "@vitejs/plugin-legacy";
 export const useplugins = (env: Record<string, string>, mode: string) => {
   const isProd = env.VITE_NODE_ENV === "production";
   const plugins = [
-    vue({ reactivityTransform: true }),
+    vue({ reactivityTransform: true, template: { compilerOptions: { hoistStatic: false } } }),
     vueJsx(),
     AutoImport({
       include: [/\.vue$/, /\.[tj]sx$/, /\.[tj]s$/],

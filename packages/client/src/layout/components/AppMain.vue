@@ -10,26 +10,28 @@
   </div>
 </template>
 
-<script>
-import { usePermitStore } from "@/store/modules/permit";
-import { computed } from "vue";
+<script lang="ts">
+import { useTagViewsStore } from "@/store/modules/tagViews";
+import { defineComponent, watch } from "vue";
+import { useRoute } from "vue-router";
 
-export default {
+export default defineComponent({
   name: "AppMain",
   setup() {
-    const permission = usePermitStore();
-    const cacheViews = computed(() => {
-      return permission.cacheViews;
-    });
+    const route = useRoute();
+    const permitStore = useTagViewsStore();
 
-    const getTransitionName = (route) => {
-      const name = "fade-slide";
-      return route.transitionName || name;
-    };
+    let cacheViews = permitStore.cacheViews;
+    watch(
+      () => route.fullPath,
+      () => {
+        cacheViews = permitStore.cacheViews;
+      }
+    );
 
-    return { cacheViews, getTransitionName };
+    return { cacheViews };
   },
-};
+});
 </script>
 
 <style scoped>
