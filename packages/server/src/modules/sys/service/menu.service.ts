@@ -82,7 +82,7 @@ export class MenuService extends BaseService {
         a.url,
         a.is_show AS isShow,
         a.keep_alive AS keepAlive,
-        a.order_num AS oderName `
+        a.order_num AS orderNum `
       )
       .innerJoin(RoleMenu, 'b', 'a.id =b.menuId')
       .where('b.roleId In (:ids)', { ids: roleIds })

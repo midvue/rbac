@@ -5,6 +5,7 @@ import type { BtnListState } from "../types";
 import { useEditDialog } from "./useEditDialog";
 import { useList } from "./useList";
 import { useSearchForm } from "./useSearchForm";
+import { usePermission } from "@/vhooks/usePermission";
 
 export default defineComponent({
   name: "BtnMg",
@@ -19,6 +20,9 @@ export default defineComponent({
         total: 0,
       },
     });
+
+    const [isAdd, addInfo] = usePermission("Add");
+    console.log(isAdd, addInfo);
 
     //获取用户列表
     const getSearchList = () => {

@@ -6,7 +6,7 @@ import { defineStore } from "pinia";
 
 interface IPermitStore {
   asyncRouters: EmRouteRaw[];
-  btnMap: Record<string, Record<string, EmRouteRaw>>;
+  menuBtnMap: Record<string, Record<string, EmRouteRaw>>;
 }
 
 export const usePermitStore = defineStore({
@@ -15,7 +15,7 @@ export const usePermitStore = defineStore({
     return {
       // 动态路由生成的菜单
       asyncRouters: [],
-      btnMap: {},
+      menuBtnMap: {},
     } as IPermitStore;
   },
 
@@ -24,8 +24,8 @@ export const usePermitStore = defineStore({
     async getAsyncRoutes() {
       const roleIds = getUserInfo()?.roles.map((role) => role.roleId);
       const list = await getMenusByRole({ roleIds }).then((res) => res.data.list);
-      const { menuTree, btnMap } = generateAsyncRoutes(list, router);
-      this.btnMap = btnMap;
+      const { menuTree, menuBtnMap } = generateAsyncRoutes(list, router);
+      this.menuBtnMap = menuBtnMap;
       this.asyncRouters = menuTree;
       return menuTree;
     },

@@ -61,7 +61,7 @@ const menuToRoute = (menu: Partial<Menu>) => {
 const convertToMenuTree = (_menus: Menu[] = []) => {
   const menuTree: Menu[] = [];
   const menuMap = {} as Record<string, Menu>;
-  const btnMap = {} as Record<string, Record<string, Menu>>;
+  const menuBtnMap = {} as Record<string, Record<string, Menu>>;
 
   const menus: Menu[] = [];
   // 将一维数组转换成以id为键的对象map
@@ -70,10 +70,11 @@ const convertToMenuTree = (_menus: Menu[] = []) => {
       menuMap[item.id] = menuToRoute(item);
       menus.push(item);
     } else {
-      if (!btnMap[item.pid]) {
-        btnMap[item.pid] = {};
+      if (!menuBtnMap[item.pid]) {
+        menuBtnMap[item.pid] = {};
       }
-      btnMap[item.pid][item.code] = { ...item };
+      const { code, name, icon, id } = item;
+      menuBtnMap[item.pid][item.code] = { code, name, icon, id } as Menu;
     }
   });
 
@@ -94,7 +95,7 @@ const convertToMenuTree = (_menus: Menu[] = []) => {
     }
   });
 
-  return [menuTree, btnMap] as const;
+  return [menuTree, menuBtnMap] as const;
 };
 
 /**
@@ -105,17 +106,17 @@ const convertToMenuTree = (_menus: Menu[] = []) => {
  */
 const traverseMenuTree = (
   menuTree: Menu[],
-  btnMap: Record<string, Record<string, Menu>>,
+  menuBtnMap: Record<string, Record<string, Menu>>,
   path = ""
 ) => {
   menuTree.forEach((menuItem) => {
     const key = path ? `${path}/${menuItem.path}` : `${menuItem.path}`;
-    if (btnMap[menuItem.id]) {
-      btnMap[key] = btnMap[menuItem.id];
-      delete btnMap[menuItem.id];
+    if (menuBtnMap[menuItem.id]) {
+      menuBtnMap[key] = menuBtnMap[menuItem.id];
+      delete menuBtnMap[menuItem.id];
     }
     if (menuItem.children?.length) {
-      traverseMenuTree(menuItem.children, btnMap, key);
+      traverseMenuTree(menuItem.children, menuBtnMap, key);
     }
     delete menuItem.component;
   });
@@ -123,7 +124,7 @@ const traverseMenuTree = (
 
 //菜单转成异步路由
 export const generateAsyncRoutes = (list: Menu[] = [], router: Router) => {
-  const [menuTree, btnMap] = convertToMenuTree(list);
+  const [menuTree, menuBtnMap] = convertToMenuTree(list);
   //添加/根路由
   const firstRoute = {
     path: "/",
@@ -138,8 +139,8 @@ export const generateAsyncRoutes = (list: Menu[] = [], router: Router) => {
   errorRouter.forEach((item) => router.addRoute(item));
 
   //遍历菜单树，将按钮权限结构转换成以path为键的对象map
-  //非纯函数，会修改原对象menuTree，btnMap
-  traverseMenuTree(menuTree, btnMap);
+  //非纯函数，会修改原对象menuTree，menuBtnMap
+  traverseMenuTree(menuTree, menuBtnMap);
 
-  return { menuTree, btnMap };
+  return { menuTree, menuBtnMap };
 };
