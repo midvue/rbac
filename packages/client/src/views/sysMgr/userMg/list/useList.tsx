@@ -84,13 +84,13 @@ export const useList = (
         title: "编辑",
         type: "primary",
         click: ({ row }: RowScoped<User>) => handleEdit(row),
-        permission: "user:edit",
+        permission: "Edit",
       },
       {
         title: "删除",
         type: "danger",
         click: ({ row }: RowScoped<User>) => handleDelete(row.id),
-        permission: "user:del",
+        permission: "Del",
       },
     ],
   };
@@ -98,7 +98,7 @@ export const useList = (
   return () => (
     <>
       <div class="toolbar">
-        <el-button type="primary" icon="plus" onClick={() => handleAdd()} v-permission="user:add">
+        <el-button type="primary" icon="plus" onClick={() => handleAdd()} v-permission="Add">
           添加用户
         </el-button>
       </div>

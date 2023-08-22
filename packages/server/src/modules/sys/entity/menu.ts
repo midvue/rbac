@@ -5,11 +5,13 @@ import { BaseEntity } from '../../base/base.entity';
  * 菜单表
  */
 @Entity('sys_menu')
+@Index('uk_compx_code', ['pid', 'code'], {
+  unique: true,
+})
 export class Menu extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Index('uk_code', { unique: true })
   @Column({ comment: '菜单编码', length: 48 })
   code: string;
 

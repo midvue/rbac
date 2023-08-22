@@ -93,13 +93,13 @@ export const useDetail = (
         title: "编辑",
         type: "primary",
         click: ({ row }) => openMenuDialog(row),
-        permission: "menu:edit",
+        permission: "Edit",
       },
       {
         title: "删除",
         type: "danger",
         click: ({ row }) => handleDelete(row.id),
-        permission: "menu:del",
+        permission: "Del",
       },
     ],
   };
@@ -171,13 +171,13 @@ const useBtnTable = (state: MenuListState, getBtnlist: () => void) => {
         title: "编辑",
         type: "primary",
         click: ({ row }) => openBtnDialog(row),
-        permission: "menu:editbtn",
+        permission: "EditBtn",
       },
       {
         title: "删除",
         type: "danger",
         click: ({ row }) => handleDelete(row.id),
-        permission: "menu:delbtn",
+        permission: "DelBtn",
       },
     ],
   };

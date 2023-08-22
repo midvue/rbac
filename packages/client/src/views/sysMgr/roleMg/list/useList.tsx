@@ -120,19 +120,19 @@ export const useList = (
         title: "分配权限",
         type: "primary",
         click: ({ row }: RowScoped<Role>) => handlePermission(row),
-        permission: "role:sign",
+        permission: "Sign",
       },
       {
         title: "编辑",
         type: "primary",
         click: ({ row }: RowScoped<Role>) => handleEdit(row),
-        permission: "role:edit",
+        permission: "Edit",
       },
       {
         title: "删除",
         type: "danger",
         click: ({ row }: RowScoped<Role>) => handleDelete(row.id),
-        permission: "role:del",
+        permission: "Del",
       },
     ],
   };
@@ -140,7 +140,7 @@ export const useList = (
   return () => (
     <>
       <div class="toolbar">
-        <el-button type="primary" icon="plus" onClick={() => handleAdd()} v-permission="role:add">
+        <el-button type="primary" icon="plus" onClick={() => handleAdd()} v-permission="Add">
           添加角色
         </el-button>
       </div>

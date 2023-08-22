@@ -34,7 +34,7 @@
   type="primary"
   icon="plus"
   onClick={() => handleAdd()}
-  v-permission="user:add"
+  v-permission="Add"
 >
   添加用户
 </el-button>

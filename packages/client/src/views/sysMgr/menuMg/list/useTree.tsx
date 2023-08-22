@@ -73,7 +73,7 @@ export const useTree = (state: MenuListState, openMenuDialog: OpenDialogFunc) =>
   return () => (
     <el-aside width="260px" class="aside">
       <div class="btns">
-        <el-button type="primary" onClick={() => openMenuDialog()} v-permission="menu:add">
+        <el-button type="primary" onClick={() => openMenuDialog()} vPermission="Add">
           新增菜单
         </el-button>
         <el-button type="primary" onClick={() => handleToggleExpand()}>
@@ -101,7 +101,7 @@ export const useTree = (state: MenuListState, openMenuDialog: OpenDialogFunc) =>
         data={tState.menuTree}
         props={treeProps}
         highlight-current
-        rowHeight={40}
+        itemSize={36}
         height={700}
         node-key="id"
         defaultExpandedKeys={tState.expandKeys}
